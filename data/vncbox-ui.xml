@@ -1,0 +1,19 @@
+<ui>
+  <menubar name="MainMenu">
+    <menu name="FileMenu" action="FileMenu">
+      <menuitem name="XServerRestart" action="XServerRestart" />
+      <separator />
+      <menuitem name="Quit" action="Quit" />
+      <placeholder name="FileMenuAdditions" />
+    </menu>
+  </menubar>
+
+  <toolbar name="MainToolbar" action="MainMenuBar">
+    <placeholder name="ToolItems">
+      <toolitem name="XServerRestart" action="XServerRestart"/>
+      <separator/>
+      <toolitem name="Quit" action="Quit"/>
+      <separator/>
+    </placeholder>
+  </toolbar>
+</ui>

@@ -1,0 +1,147 @@
+#!/bin/sh
+
+
+JAIL=/home/vncjail
+JAILUSER=vnc
+JAILGROUP=users
+BASEDIR=`dirname $0`
+SKELDIR=$BASEDIR/skel
+
+
+protect_dirs() {
+
+    PROTECT_EXCEPTIONS="/usr/share/fonts /etc/dbus-1 /usr/share/dbus-1 /etc/gconf /tmp"
+
+    find $JAIL -type d -perm -004 -not -user $JAILUSER |
+    while read d
+    do
+        chmod o-r "$d"
+    done
+
+    for d in $PROTECT_EXCEPTIONS
+    do
+        find $JAIL/./$d -type d | xargs chmod o+r
+    done
+}
+
+
+list_package_files() {
+    pacman -Ql $* |
+    grep -v /man/ |
+    grep -v /doc/ |
+    grep -v /info/ |
+    grep -v /include/ |
+    cut -f2- -d' ' |
+    while read f
+    do
+        test -f $f || continue
+        echo $f
+    done
+}
+
+
+# root?
+if [ "$(whoami)" != "root" ]
+then
+    echo "must be run as root"
+    exit 1
+fi
+
+
+# clean up
+if [ -d $JAIL ]
+then
+    echo -n "Jail $JAIL already exists. Press Enter to reset it. "
+    read x
+    mount | grep -q $JAIL/proc && umount $JAIL/proc
+    rm -r $JAIL
+fi
+
+grep -q "^$JAILUSER:" /etc/passwd && userdel $JAILUSER
+
+
+# basic packages
+
+jk_init -j $JAIL basicshell xclients
+
+
+# packages
+
+jk_cp -j $JAIL \
+    $(list_package_files \
+        dbus-c++ \
+        x11vnc \
+        openssl \
+        xournal \
+        inkscape \
+        metacity \
+        ttf-bitstream-vera pango fontconfig \
+        shared-mime-info \
+        dbus dbus-core gconf) \
+    /usr/share/themes/Clearlooks
+
+
+# devices
+jk_cp -j $JAIL /dev/null /dev/urandom
+
+
+# /tmp
+mkdir $JAIL/tmp
+chmod a+wx $JAIL/tmp
+chmod o+t  $JAIL/tmp
+
+# /proc
+mkdir $JAIL/proc
+
+# /dev
+mkdir $JAIL/dev
+mknod $JAIL/dev/null c 1 3
+chmod a+w $JAIL/dev/null
+
+
+# dbus
+mkdir -p $JAIL/var/lib/dbus
+chroot $JAIL dbus-uuidgen > $JAIL/var/lib/dbus/machine-id
+
+# pango configuration
+chroot $JAIL pango-querymodules > $JAIL/etc/pango/pango.modules
+
+# mime database
+update-mime-database $JAIL/usr/share/mime
+
+# gconf
+mkdir -p $JAIL/etc/gconf/gconf.xml.mandatory
+chroot $JAIL gconfpkg --install metacity
+chroot $JAIL gconfpkg --install gnome-panel
+chmod +x $JAIL/etc/gconf/gconf.xml.defaults
+chmod -R +r $JAIL/etc/gconf/gconf.xml.defaults
+
+# user
+mkdir $JAIL/home
+jk_addjailuser -d /home/$JAILUSER -m -k $SKELDIR -g $JAILGROUP -s /bin/bash $JAIL $JAILUSER
+
+# user configuration
+echo "gconftool-2 --set /apps/metacity/general/num_workspaces --type int 1" | sudo -u $JAILUSER -i
+echo "gconftool-2 --set --type string /apps/metacity/global_keybindings/switch_windows '<Ctrl>Tab'" | sudo -u $JAILUSER -i
+
+# directories
+protect_dirs
+
+
+
+# messages
+
+echo "========================================================================="
+echo "Add to /etc/fstab:"
+echo "--------------------------------------------------------------------------"
+echo "none $JAIL/proc proc defaults 0 0"
+echo "--------------------------------------------------------------------------"
+echo "========================================================================="
+echo "Add to sudoers:"
+echo "--------------------------------------------------------------------------"
+echo "<user>	ALL=($JAILUSER) NOPASSWD:ALL"
+echo "--------------------------------------------------------------------------"
+echo "========================================================================="
+
+
+grep -q $JAIL/proc /etc/fstab && mount $JAIL/proc

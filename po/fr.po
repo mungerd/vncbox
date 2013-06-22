@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# David Munger <mungerd@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-12-09 13:07-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: David Munger <mungerd@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/vncbox.cc:79
+msgid "TERMINATING"
+msgstr "FERMETURE"
+
+#: ../src/vncboxwindow.cc:56
+msgid "_X Server"
+msgstr "Serveur _X"
+
+#: ../src/vncboxwindow.cc:57
+msgid "_Restart"
+msgstr "_Redémarrer"
+
+#: ../src/vncboxwindow.cc:63
+msgid "_VNC Server"
+msgstr "Serveur _VNC"
+
+#: ../src/vncboxwindow.cc:64
+msgid "_Active"
+msgstr "_Actif"
+
+#: ../src/vncboxwindow.cc:66
+msgid "_Server Information"
+msgstr "Informations sur le _serveur"
+
+#: ../src/vncboxwindow.cc:68
+msgid "_Clients Information"
+msgstr "Informations sur les _clients"
+
+#: ../src/vncboxwindow.cc:71
+msgid "_Applications"
+msgstr "_Applications"
+
+#: ../src/vncboxwindow.cc:72
+msgid "_Windows"
+msgstr "_Fenêtres"
+
+#: ../src/vncboxwindow.cc:144
+msgid "Quitting."
+msgstr "Quitter."
+
+#: ../src/vncboxwindow.cc:148
+msgid "Current session state will be lost."
+msgstr "L'état de la session en cours sera perdu."
+
+#: ../src/vncboxwindow.cc:237
+msgid "No applications"
+msgstr "Aucune application"
+
+#: ../src/vncboxwindow.cc:285
+msgid "No windows"
+msgstr "Aucune fenêtre"
+
+#: ../src/vncboxwindow.cc:386
+msgid "VNC server ready."
+msgstr "Serveur VNC prêt."
+
+#: ../src/vncboxwindow.cc:388
+msgid "VNC server stopped."
+msgstr "Serveur VNC arrêté."
+
+#: ../src/vncboxwindow.cc:425
+msgid "VNC client connected (ID: %1 / IP: %2)."
+msgstr "Client VNC connecté (ID: %1 / IP: %2)."
+
+#: ../src/vncboxwindow.cc:435
+msgid "VNC client disconnected (ID: %1 / IP: %2)."
+msgstr "Client VNC déconnecté (ID: %1 / IP: %2)."
+
+#: ../src/vncclientsinfodialog.cc:32
+msgid "VNC Clients Information"
+msgstr "Informations sur les clients VNC"
+
+#: ../src/vncclientsinfodialog.cc:47
+msgid "ID"
+msgstr "ID"
+
+#: ../src/vncclientsinfodialog.cc:48
+msgid "Username"
+msgstr "Utilisateur"
+
+#: ../src/vncclientsinfodialog.cc:49
+msgid "IP address"
+msgstr "Adresse IP"
+
+#: ../src/vncclientsinfodialog.cc:50
+msgid "View only"
+msgstr "Voir seulement"
+
+#: ../src/vncclientsinfodialog.cc:51
+msgid "Login time"
+msgstr "Heure de connexion"
+
+#: ../src/vncclientsinfodialog.cc:85
+msgid "No"
+msgstr "Non"
+
+#: ../src/vncclientsinfodialog.cc:88
+msgid "Yes"
+msgstr "Oui"
+
+#: ../src/vncserverinfodialog.cc:39
+msgid "VNC Server Information"
+msgstr "Informations sur le serveur VNC"
+
+#: ../src/vncserverinfodialog.cc:51
+msgid "Display:"
+msgstr "Affichage:"
+
+#: ../src/vncserverinfodialog.cc:53
+msgid "RFB:"
+msgstr "RFB:"
+
+#: ../src/vncserverinfodialog.cc:55
+msgid "HTTP:"
+msgstr "HTTP:"
+
+#: ../src/vncserverinfodialog.cc:57
+msgid "Password:"
+msgstr "Mot de passe:"
+
+#: ../src/vncserverinfodialog.cc:149
+msgid "Copy to clipboard"
+msgstr "Copier vers le presse-papiers"

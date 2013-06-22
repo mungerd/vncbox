@@ -1,0 +1,3 @@
+[submodule "xauthxx"]
+	path = xauthxx
+	url = https://github.com/mungerd/xauthxx.git

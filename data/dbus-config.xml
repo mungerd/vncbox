@@ -1,0 +1,37 @@
+<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-Bus Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <type>session</type>
+  <!-- do no fork <fork />-->
+
+  <listen>unix:abstract=vncbox-%1</listen>
+
+  <!-- this bus is exclusively for the VncBox service -->
+  <policy context="default">
+    <deny send_interface="*"/>
+    <deny receive_interface="*"/>
+    <deny own="*"/>
+    <allow user="%2"/>
+    <allow user="%3"/>
+    <allow send_destination="org.gnome.VncBox"/>
+    <allow receive_sender="org.gnome.VncBox"/>
+    <allow send_requested_reply="true"/>
+    <allow receive_requested_reply="true"/>
+    <allow own="org.gnome.VncBox"/>
+  </policy>
+
+  <limit name="max_incoming_bytes">10000</limit>
+  <limit name="max_outgoing_bytes">10000</limit>
+  <limit name="max_message_size">10000</limit>
+  <limit name="service_start_timeout">3000</limit>
+  <limit name="auth_timeout">10000</limit>
+  <limit name="max_completed_connections">20</limit>
+  <limit name="max_incomplete_connections">20</limit>
+  <limit name="max_connections_per_user">10</limit>
+  <limit name="max_pending_service_starts">10</limit>
+  <limit name="max_names_per_connection">50</limit>
+  <limit name="max_match_rules_per_connection">50</limit>
+  <limit name="max_replies_per_connection">50</limit>
+  <limit name="reply_timeout">30000</limit>
+
+</busconfig>

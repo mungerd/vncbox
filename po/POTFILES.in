@@ -1,0 +1,4 @@
+src/vncbox.cc
+src/vncboxwindow.cc
+src/vncclientsinfodialog.cc
+src/vncserverinfodialog.cc

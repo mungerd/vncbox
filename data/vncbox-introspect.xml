@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<node name="/org/gnome/VncBox">
+  <interface name="org.gnome.VncBox">
+    <method name="RequestAccept">
+      <arg type="a{ss}" name="notifydata" direction="in"/>
+      <arg type="i" name="response" direction="out"/>
+    </method>
+    <method name="NotifyAfterAccept">
+      <arg type="a{ss}" name="notifydata" direction="in"/>
+    </method>
+    <method name="NotifyGone">
+      <arg type="a{ss}" name="notifydata" direction="in"/>
+    </method>
+  </interface>
+</node>
